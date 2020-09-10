@@ -22,7 +22,7 @@ MODEL_PATH = 'models/lr_model.pkl'
 def home():
  return render_template('home.html')
 
-@app.route('/predict',methods=['POST'])
+@app.route('/predict',methods=['POST','GET'])
 def predict():
     if request.method == 'POST':
         message = request.form['message']
@@ -59,7 +59,7 @@ def predict():
 #                 output = ""
         
         return render_template('home.html',prediction = my_prediction)
-    else:
+    elif request.method == 'GET':
         return render_template('home.html',prediction = None)
 
 
