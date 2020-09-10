@@ -1,82 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>ML API</title>
-  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  
-	<title>Sentiment Detector</title>
-	<!-- <link rel="stylesheet" type="text/css" href="../static/css/styles.css"> -->
-	<!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">-->
 </head>
     
 <style>
-body  {
-     background-color: #d5f4e6;
+body  
+{
+background-color: #d5f4e6;
 }
 </style>
     
 <body> 
-	<header>
-		<div id="brandname">
-			<h2 style="background:powderblue;">Machine Learning App with Flask and Heroku</h2>     
-		</div>
+      <header>
+      <div id="brandname">
+          <h2 style="background:powderblue;">Machine Learning App with Flask and Heroku</h2>     
+      </div>
+      </header>
 
-	</header>
-
-	<div class="container">
-<!--         <h1>Sentiment Analysis</h1> -->
-       	        <h3 style="color:#008000;"><strong>Sentiment Analysis</strong></h3>
-		<form action="{{ url_for('predict')}}" method="POST">
-		<p style="color:#DC143C;">Enter Your Review Here</p>
+      <div class="container">
+          <h2 style="color:#008000;"><strong>Sentiment Analysis</strong></h2>
+          <form action="{{ url_for('predict')}}" method="POST">
+          <p style="color:#DC143C;">Enter Your Review Here</p>
+          <span style='font-size:20px;'></span>
+          <textarea placeholder="Enter your Text here...." name="message" rows="4" cols="30" style='font-size:20px;              '></textarea>
+          <br/>   
+          <input type="submit" class="btn-info" value="Submit">
+          </form>
+      </div>   
+    
+      <div class="my_prediction, output"
+           {% if prediction == 1%}
+           <h1 style="color:#008000;"><strong>Positive</strong></h1>
+           <span style='font-size:100px;'>&#128522;</span>
+           <br/>
+           <br/>
+                {% if summary != ""%}
+                <p1 style="color:#DC143C;"><strong>This review talks about....</strong></p1>
+                <br/>
+                <p1 style="color:#FA8072;">{{summary}}</p1>
                 <span style='font-size:20px;'></span>
-		<!-- <input type="text" name="comment"/> -->
-		<textarea placeholder="Enter your Text here...." name="message" rows="5" cols="30"></textarea>
-		<input type="submit" class="btn-info" value="Submit">
-		
-	</form>
-	<div class="my_prediction">
-	     
-	{% if prediction == 1%}
-	<h1 style="color:#008000;"><strong>Positive</strong></h1>
-	<span style='font-size:100px;'>&#128522;</span>
-        <br/>
-<!--     	    {% if summary != ""%}
-             <p1 style="color:#DC143C;"><strong>This review talks about....</strong></p1>
-             <br/>
-             <p1 style="color:#FA8072;">{{summary}}</p1>
-             <span style='font-size:20px;'></span>
-      	     {% endif %} -->
+                {% endif %}
     
+          {% elif prediction == 0%}
+          <h1 style="color:#008000;"><strong>Negative</strong></h1>
+          <span style='font-size:100px;'>&#128543;</span>
+          <br/>
+          <br/>
+                {% if summary != ""%}
+                <p1 style="color:#DC143C;"><strong>This review talks about....</strong></p1>
+                <br/>
+                <p1 style="color:#FA8072;">{{summary}}</p1>
+                <span style='font-size:20px;'></span>
+                {% endif %}
     
-	{% elif prediction == 0%}
-	<h1 style="color:#008000;"><strong>Negative</strong></h1>
-	<span style='font-size:100px;'>&#128543;</span>
-        <br/>
-<!--     	    {% if summary != ""%}
-             <p1 style="color:#DC143C;"><strong>This review talks about....</strong></p1>
-             <br/>
-             <p1 style="color:#FA8072;">{{summary}}</p1>
-             <span style='font-size:20px;'></span>
-      	     {% endif %} -->
-	
+         {% elif prediction == 3%}
+         <h2 style="color:red;"><strong>Enter text atleast greater than 3 and Try Again..!!!</strong></h2>
     
-	{% elif prediction == 3%}
-        <h2 style="color:red;"><strong>Enter text atleast greater than 3 and Try Again..!!!</strong></h2>
-    
-	{% endif %} 
+         {% endif %} 
 
-
-  
-	</div>
-</div>
-
-	
-	
-
+     </div>
 </body>
 </html>

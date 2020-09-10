@@ -5,18 +5,19 @@ import gensim
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+from keras.models import load_model
 from nltk.corpus import stopwords
 nltk.download('stopwords')
 stop_words = set(stopwords.words('english'))
 stop_words.remove("not")
 import random
-from textblob import TextBlob
-from textblob import Word
-
+from textblob import TextBlob, Word
 
 app = Flask(__name__)
-MODEL_PATH1 = 'models/tfidf_model.pkl'
-MODEL_PATH = 'models/lr_model.pkl'
+
+MODEL_tfidf = 'models/tfidf_model.pkl'
+MODEL_lr = 'models/lr_model.pkl'
+
 
 @app.route('/')
 def home():
@@ -32,36 +33,34 @@ def predict():
             data = gensim.utils.simple_preprocess(text, min_len=2)
             review = ' '.join(WordNetLemmatizer().lemmatize(word) for word in data if word not in stop_words)
             pre_processed_reviews.append(review.strip())
-            tfidf_model = joblib.load(MODEL_PATH1)
+            tfidf_model = joblib.load(MODEL_tfidf)
             vect = tfidf_model.transform(pre_processed_reviews)
-            lr_model = joblib.load(MODEL_PATH)
+            lr_model = joblib.load(MODEL_lr)
             my_prediction = lr_model.predict(vect)
         else:
             my_prediction=3
-#             return render_template('home.html',prediction = my_prediction)
+            return render_template('home.html',prediction = my_prediction)
             
-#         blob=TextBlob(text)
-#         nouns=list()
-#         for word,tag in blob.tags:
-#             if tag == 'NN':
-#                 nouns.append(word.lemmatize())
-#         display=[]
-#         output=""
-#         for item in random.sample(nouns,len(nouns)):  
-#             word=Word(item)
-#             if word not in display:
-#                 display.append(word.capitalize())
+        blob=TextBlob(text)
+        nouns=list()
+        for word,tag in blob.tags:
+            if tag == 'NN':
+                nouns.append(word.lemmatize())
+        display=[]
+        output=""
+        for item in random.sample(nouns,len(nouns)):  
+            word=Word(item)
+            if word not in display:
+                display.append(word.capitalize())
                 
-#         for i in display:
-#             if len(i) > 2:
-#                 output = output + " " + i
-#             else:
-#                 output = ""
+        for i in display:
+            if len(i) > 2:
+                output = output + " " + i
+            else:
+                output = ""
         
-        return render_template('home.html',prediction = my_prediction)
-#     elif request.method == 'GET':
-#         return render_template('home.html',prediction = None)
+        return render_template('home.html', prediction = my_prediction, summary = output)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
