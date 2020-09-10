@@ -40,27 +40,27 @@ def predict():
             my_prediction=3
             return render_template('home.html',prediction = my_prediction)
             
-        blob=TextBlob(text)
-        nouns=list()
-        for word,tag in blob.tags:
-            if tag == 'NN':
-                nouns.append(word.lemmatize())
-        display=[]
-        output=""
-        for item in random.sample(nouns,len(nouns)):  
-            word=Word(item)
-            if word not in display:
-                display.append(word.capitalize())
+#         blob=TextBlob(text)
+#         nouns=list()
+#         for word,tag in blob.tags:
+#             if tag == 'NN':
+#                 nouns.append(word.lemmatize())
+#         display=[]
+#         output=""
+#         for item in random.sample(nouns,len(nouns)):  
+#             word=Word(item)
+#             if word not in display:
+#                 display.append(word.capitalize())
                 
-        for i in display:
-            if len(i) > 2:
-                output = output + " " + i
-            else:
-                output = ""
+#         for i in display:
+#             if len(i) > 2:
+#                 output = output + " " + i
+#             else:
+#                 output = ""
         
-        return render_template('home.html',prediction = my_prediction, summary = output)
+        return render_template('home.html',prediction = my_prediction)
     else:
-        return render_template('home.html',prediction = None, summary = None)
+        return render_template('home.html',prediction = None)
 
 
 if __name__ == '__main__':
