@@ -2,7 +2,6 @@ from flask import Flask, jsonify,  request, render_template
 import joblib
 import numpy as np
 import gensim
-import pickle
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
