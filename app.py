@@ -59,7 +59,7 @@ def predict():
                 output = ""
         
         return render_template('home.html',prediction = my_prediction, summary = output)
-   else:
+    else:
         return render_template('home.html',prediction = None, summary = None)
 
 
