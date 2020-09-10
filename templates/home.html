@@ -30,16 +30,16 @@ body  {
 
 	<div class="container">
 <!--         <h1>Sentiment Analysis</h1> -->
-       	<h2 style="color:#008000;"><strong>Sentiment Analysis</strong></h2>
+       	        <h3 style="color:#008000;"><strong>Sentiment Analysis</strong></h3>
 		<form action="{{ url_for('predict')}}" method="POST">
 		<p style="color:#DC143C;">Enter Your Review Here</p>
-        <span style='font-size:20px;'></span>
+                <span style='font-size:20px;'></span>
 		<!-- <input type="text" name="comment"/> -->
-		<textarea placeholder="Enter your Text here...." name="message" rows="5" cols="30" style='font-size:20px;'></textarea>
+		<textarea placeholder="Enter your Text here...." name="message" rows="5" cols="30"></textarea>
 		<input type="submit" class="btn-info" value="Submit">
 		
 	</form>
-	<div class="my_prediction, output"
+	<div class="my_prediction"
 	{% if prediction == 1%}
 	<h1 style="color:#008000;"><strong>Positive</strong></h1>
 	<span style='font-size:100px;'>&#128522;</span>
