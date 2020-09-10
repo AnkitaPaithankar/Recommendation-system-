@@ -15,9 +15,8 @@ from textblob import Word
 
 
 app = Flask(__name__)
-model_load = joblib.load("models/xgb_model.pkl")
-tfidf_model = joblib.load("models/tfidf_model.pkl")
-lr_model = joblib.load("models/lr_model.pkl")
+MODEL_PATH1 = 'models/tfidf_model.pkl'
+MODEL_PATH = 'models/lr_model.pkl'
 
 @app.route('/')
 def home():
@@ -33,7 +32,9 @@ def predict():
             data = gensim.utils.simple_preprocess(text, min_len=2)
             review = ' '.join(WordNetLemmatizer().lemmatize(word) for word in data if word not in stop_words)
             pre_processed_reviews.append(review.strip())
+            tfidf_model = load_model(MODEL_PATH1)
             vect = tfidf_model.transform(pre_processed_reviews)
+            lr_model = load_model(MODEL_PATH)
             my_prediction = lr_model.predict(vect)
         else:
             my_prediction=3
