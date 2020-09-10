@@ -55,6 +55,8 @@ def predict():
         for i in display:
             if len(i) > 2:
                 output = output + " " + i
+            else:
+                output = ""
         
         return render_template('home.html',prediction = my_prediction, summary = output)
 
