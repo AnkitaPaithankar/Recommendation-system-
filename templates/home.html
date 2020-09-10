@@ -40,34 +40,33 @@ body  {
 		
 	</form>
 	<div class="my_prediction, output"
+	     
 	{% if prediction == 1%}
 	<h1 style="color:#008000;"><strong>Positive</strong></h1>
 	<span style='font-size:100px;'>&#128522;</span>
-    <br/>
-    <br/>
-    	{% if summary != ""%}
-        <p1 style="color:#DC143C;"><strong>This review talks about....</strong></p1>
         <br/>
-        <p1 style="color:#FA8072;">{{summary}}</p1>
-        <span style='font-size:20px;'></span>
-      	{% endif %}
+    	    {% if summary != ""%}
+             <p1 style="color:#DC143C;"><strong>This review talks about....</strong></p1>
+             <br/>
+             <p1 style="color:#FA8072;">{{summary}}</p1>
+             <span style='font-size:20px;'></span>
+      	     {% endif %}
     
     
 	{% elif prediction == 0%}
 	<h1 style="color:#008000;"><strong>Negative</strong></h1>
 	<span style='font-size:100px;'>&#128543;</span>
-    <br/>
-    <br/>
-    	{% if summary != ""%}
-        <p1 style="color:#DC143C;"><strong>This review talks about....</strong></p1>
         <br/>
-        <p1 style="color:#FA8072;">{{summary}}</p1>
-        <span style='font-size:20px;'></span>
-      	{% endif %}
+    	    {% if summary != ""%}
+             <p1 style="color:#DC143C;"><strong>This review talks about....</strong></p1>
+             <br/>
+             <p1 style="color:#FA8072;">{{summary}}</p1>
+             <span style='font-size:20px;'></span>
+      	     {% endif %}
 	
     
 	{% elif prediction == 3%}
-    <h2 style="color:red;"><strong>Enter text atleast greater than 3 and Try Again..!!!</strong></h2>
+        <h2 style="color:red;"><strong>Enter text atleast greater than 3 and Try Again..!!!</strong></h2>
     
 	{% endif %} 
 
