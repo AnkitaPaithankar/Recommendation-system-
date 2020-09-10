@@ -22,7 +22,7 @@ MODEL_PATH = 'models/lr_model.pkl'
 def home():
  return render_template('home.html')
 
-@app.route('/predict',methods=['POST','GET'])
+@app.route('/predict',methods=['POST'])
 def predict():
     if request.method == 'POST':
         message = request.form['message']
@@ -38,7 +38,7 @@ def predict():
             my_prediction = lr_model.predict(vect)
         else:
             my_prediction=3
-            return render_template('home.html',prediction = my_prediction)
+#             return render_template('home.html',prediction = my_prediction)
             
 #         blob=TextBlob(text)
 #         nouns=list()
@@ -59,8 +59,8 @@ def predict():
 #                 output = ""
         
         return render_template('home.html',prediction = my_prediction)
-    elif request.method == 'GET':
-        return render_template('home.html',prediction = None)
+#     elif request.method == 'GET':
+#         return render_template('home.html',prediction = None)
 
 
 if __name__ == '__main__':
